@@ -1,5 +1,13 @@
 name = "hovert60"
 
+
+[templates]
+
+    file = ""
+
+    layer = ""
+
+
 [slots]
 
 # Left hand keys
