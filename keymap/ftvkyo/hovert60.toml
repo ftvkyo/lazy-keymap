@@ -11,75 +11,75 @@ name = "Default"
 
 [layers.default_layer.keys]
 
-l_0x0 = "`"
-l_0x1 = "1"
-l_0x2 = "2"
-l_0x3 = "3"
-l_0x4 = "4"
-l_0x5 = "5"
+l_0x0 = { d = "`", c = "&none" }
+l_0x1 = { d = "1", c = "&none" }
+l_0x2 = { d = "2", c = "&none" }
+l_0x3 = { d = "3", c = "&none" }
+l_0x4 = { d = "4", c = "&none" }
+l_0x5 = { d = "5", c = "&none" }
 
-l_1x0 = "⇥"
-l_1x1 = "Q"
-l_1x2 = "W"
-l_1x3 = "E"
-l_1x4 = "R"
-l_1x5 = "T"
+l_1x0 = { d = "⇥", c = "&none" }
+l_1x1 = { d = "Q", c = "&none" }
+l_1x2 = { d = "W", c = "&none" }
+l_1x3 = { d = "E", c = "&none" }
+l_1x4 = { d = "R", c = "&none" }
+l_1x5 = { d = "T", c = "&none" }
 
-l_2x0 = "⌃"
-l_2x1 = "A"
-l_2x2 = "S"
-l_2x3 = "D"
-l_2x4 = "F"
-l_2x5 = "G"
+l_2x0 = { d = "⌃", c = "&none" }
+l_2x1 = { d = "A", c = "&none" }
+l_2x2 = { d = "S", c = "&none" }
+l_2x3 = { d = "D", c = "&none" }
+l_2x4 = { d = "F", c = "&none" }
+l_2x5 = { d = "G", c = "&none" }
 
-l_3x0 = "⇧"
-l_3x1 = "Z"
-l_3x2 = "X"
-l_3x3 = "C"
-l_3x4 = "V"
-l_3x5 = "B"
+l_3x0 = { d = "⇧", c = "&none" }
+l_3x1 = { d = "Z", c = "&none" }
+l_3x2 = { d = "X", c = "&none" }
+l_3x3 = { d = "C", c = "&none" }
+l_3x4 = { d = "V", c = "&none" }
+l_3x5 = { d = "B", c = "&none" }
 
-l_4x0 = "&none"
-l_4x1 = "&none"
-l_4x2 = "⌥"
-l_4x3 = "⌘"
-l_4x4 = "␣"
-l_4x5 = "&none"
+l_4x0 = { d = " ", c = "&none" }
+l_4x1 = { d = " ", c = "&none" }
+l_4x2 = { d = "⌥", c = "&none" }
+l_4x3 = { d = "⌘", c = "&none" }
+l_4x4 = { d = "␣", c = "&none" }
+l_4x5 = { d = " ", c = "&none" }
 
-r_0x0 = "6"
-r_0x1 = "7"
-r_0x2 = "8"
-r_0x3 = "9"
-r_0x4 = "0"
-r_0x5 = "⌫"
+r_0x0 = { d = "6", c = "&none" }
+r_0x1 = { d = "7", c = "&none" }
+r_0x2 = { d = "8", c = "&none" }
+r_0x3 = { d = "9", c = "&none" }
+r_0x4 = { d = "0", c = "&none" }
+r_0x5 = { d = "⌫", c = "&none" }
 
-r_1x0 = "Y"
-r_1x1 = "U"
-r_1x2 = "I"
-r_1x3 = "O"
-r_1x4 = "P"
-r_1x5 = "'"
+r_1x0 = { d = "Y", c = "&none" }
+r_1x1 = { d = "U", c = "&none" }
+r_1x2 = { d = "I", c = "&none" }
+r_1x3 = { d = "O", c = "&none" }
+r_1x4 = { d = "P", c = "&none" }
+r_1x5 = { d = "'", c = "&none" }
 
-r_2x0 = "H"
-r_2x1 = "J"
-r_2x2 = "K"
-r_2x3 = "L"
-r_2x4 = ";"
-r_2x5 = "⌃"
+r_2x0 = { d = "H", c = "&none" }
+r_2x1 = { d = "J", c = "&none" }
+r_2x2 = { d = "K", c = "&none" }
+r_2x3 = { d = "L", c = "&none" }
+r_2x4 = { d = ";", c = "&none" }
+r_2x5 = { d = "⌃", c = "&none" }
 
-r_3x0 = "N"
-r_3x1 = "M"
-r_3x2 = ","
-r_3x3 = "."
-r_3x4 = "/"
-r_3x5 = "⇧"
+r_3x0 = { d = "N", c = "&none" }
+r_3x1 = { d = "M", c = "&none" }
+r_3x2 = { d = ",", c = "&none" }
+r_3x3 = { d = ".", c = "&none" }
+r_3x4 = { d = "/", c = "&none" }
+r_3x5 = { d = "⇧", c = "&none" }
 
-r_4x0 = "&none"
-r_4x1 = "␣"
-r_4x2 = "⌅"
-r_4x3 = "⎇"
-r_4x4 = "&none"
-r_4x5 = "&none"
+r_4x0 = { d = " ", c = "&none" }
+r_4x1 = { d = "␣", c = "&none" }
+r_4x2 = { d = "⌅", c = "&none" }
+r_4x3 = { d = "⎇", c = "&none" }
+r_4x4 = { d = " ", c = "&none" }
+r_4x5 = { d = " ", c = "&none" }
 
 
 [layers.lower_layer]
@@ -88,72 +88,72 @@ name = "Extras"
 
 [layers.lower_layer.keys]
 
-l_0x0 = "ポ"
-l_0x1 = "テ"
-l_0x2 = "ト"
-l_0x3 = "ポ"
-l_0x4 = "テ"
-l_0x5 = "ト"
+l_0x0 = { d = "ポ", c = "&none" }
+l_0x1 = { d = "テ", c = "&none" }
+l_0x2 = { d = "ト", c = "&none" }
+l_0x3 = { d = "ポ", c = "&none" }
+l_0x4 = { d = "テ", c = "&none" }
+l_0x5 = { d = "ト", c = "&none" }
 
-l_1x0 = "ポ"
-l_1x1 = "テ"
-l_1x2 = "ト"
-l_1x3 = "ポ"
-l_1x4 = "テ"
-l_1x5 = "ト"
+l_1x0 = { d = "ポ", c = "&none" }
+l_1x1 = { d = "テ", c = "&none" }
+l_1x2 = { d = "ト", c = "&none" }
+l_1x3 = { d = "ポ", c = "&none" }
+l_1x4 = { d = "テ", c = "&none" }
+l_1x5 = { d = "ト", c = "&none" }
 
-l_2x0 = "ポ"
-l_2x1 = "テ"
-l_2x2 = "ト"
-l_2x3 = "ポ"
-l_2x4 = "テ"
-l_2x5 = "ト"
+l_2x0 = { d = "ポ", c = "&none" }
+l_2x1 = { d = "テ", c = "&none" }
+l_2x2 = { d = "ト", c = "&none" }
+l_2x3 = { d = "ポ", c = "&none" }
+l_2x4 = { d = "テ", c = "&none" }
+l_2x5 = { d = "ト", c = "&none" }
 
-l_3x0 = "ポ"
-l_3x1 = "テ"
-l_3x2 = "ト"
-l_3x3 = "ポ"
-l_3x4 = "テ"
-l_3x5 = "ト"
+l_3x0 = { d = "ポ", c = "&none" }
+l_3x1 = { d = "テ", c = "&none" }
+l_3x2 = { d = "ト", c = "&none" }
+l_3x3 = { d = "ポ", c = "&none" }
+l_3x4 = { d = "テ", c = "&none" }
+l_3x5 = { d = "ト", c = "&none" }
 
-l_4x0 = "ポ"
-l_4x1 = "テ"
-l_4x2 = "ト"
-l_4x3 = "ポ"
-l_4x4 = "テ"
-l_4x5 = "ト"
+l_4x0 = { d = "ポ", c = "&none" }
+l_4x1 = { d = "テ", c = "&none" }
+l_4x2 = { d = "ト", c = "&none" }
+l_4x3 = { d = "ポ", c = "&none" }
+l_4x4 = { d = "テ", c = "&none" }
+l_4x5 = { d = "ト", c = "&none" }
 
-r_0x0 = "ポ"
-r_0x1 = "テ"
-r_0x2 = "ト"
-r_0x3 = "ポ"
-r_0x4 = "テ"
-r_0x5 = "ト"
+r_0x0 = { d = "ポ", c = "&none" }
+r_0x1 = { d = "テ", c = "&none" }
+r_0x2 = { d = "ト", c = "&none" }
+r_0x3 = { d = "ポ", c = "&none" }
+r_0x4 = { d = "テ", c = "&none" }
+r_0x5 = { d = "ト", c = "&none" }
 
-r_1x0 = "ポ"
-r_1x1 = "テ"
-r_1x2 = "ト"
-r_1x3 = "ポ"
-r_1x4 = "テ"
-r_1x5 = "ト"
+r_1x0 = { d = "ポ", c = "&none" }
+r_1x1 = { d = "テ", c = "&none" }
+r_1x2 = { d = "ト", c = "&none" }
+r_1x3 = { d = "ポ", c = "&none" }
+r_1x4 = { d = "テ", c = "&none" }
+r_1x5 = { d = "ト", c = "&none" }
 
-r_2x0 = "ポ"
-r_2x1 = "テ"
-r_2x2 = "ト"
-r_2x3 = "ポ"
-r_2x4 = "テ"
-r_2x5 = "ト"
+r_2x0 = { d = "ポ", c = "&none" }
+r_2x1 = { d = "テ", c = "&none" }
+r_2x2 = { d = "ト", c = "&none" }
+r_2x3 = { d = "ポ", c = "&none" }
+r_2x4 = { d = "テ", c = "&none" }
+r_2x5 = { d = "ト", c = "&none" }
 
-r_3x0 = "ポ"
-r_3x1 = "テ"
-r_3x2 = "ト"
-r_3x3 = "ポ"
-r_3x4 = "テ"
-r_3x5 = "ト"
+r_3x0 = { d = "ポ", c = "&none" }
+r_3x1 = { d = "テ", c = "&none" }
+r_3x2 = { d = "ト", c = "&none" }
+r_3x3 = { d = "ポ", c = "&none" }
+r_3x4 = { d = "テ", c = "&none" }
+r_3x5 = { d = "ト", c = "&none" }
 
-r_4x0 = "ポ"
-r_4x1 = "テ"
-r_4x2 = "ト"
-r_4x3 = "ポ"
-r_4x4 = "テ"
-r_4x5 = "ト"
+r_4x0 = { d = "ポ", c = "&none" }
+r_4x1 = { d = "テ", c = "&none" }
+r_4x2 = { d = "ト", c = "&none" }
+r_4x3 = { d = "ポ", c = "&none" }
+r_4x4 = { d = "テ", c = "&none" }
+r_4x5 = { d = "ト", c = "&none" }

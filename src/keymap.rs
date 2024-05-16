@@ -8,7 +8,15 @@ use crate::keyboard::KeySlotId;
 
 
 pub type KeymapLayerId = String;
-pub type KeyConfig = String;
+
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct KeyConfig {
+    #[serde(rename = "d")]
+    pub display: String,
+    #[serde(rename = "c")]
+    pub config: String,
+}
 
 
 #[derive(Debug, Serialize, Deserialize)]

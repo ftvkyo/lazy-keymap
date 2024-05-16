@@ -41,7 +41,7 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
     let layer_name_size = 0.3;
 
     let key_pad = 0.05;
-    let key_stroke = 0.05;
+    let key_stroke = 0.01;
     let key_id_size = 0.15;
     let key_label_size = 0.3;
 
@@ -74,8 +74,8 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
         let pos = key_slot.position;
 
         let key_label: String = layer.keys.get(key_id)
-            .unwrap_or(&key_label_default)
-            .chars().take(4).collect();
+            .map(|l| l.display.chars().take(4).collect())
+            .unwrap_or(key_label_default.clone());
 
         let w = size.0 - key_pad * 2.0 - key_stroke;
         let h = size.1 - key_pad * 2.0 - key_stroke;
@@ -89,19 +89,19 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
             .set("height", h);
 
         let mut id = Text::new(key_id)
-            .set("x", x + key_stroke * 1.5)
-            .set("y", y + key_stroke + key_id_size);
+            .set("x", x + key_id_size * 0.5)
+            .set("y", y + key_id_size * 1.25);
 
         let label_shift_x = match key_label.chars().count() {
-            1 => 0.9,
-            2 => 0.6,
-            3 => 0.3,
-            _ => 0.0,
+            1 => 1.2,
+            2 => 0.9,
+            3 => 0.6,
+            _ => 0.3,
         } * key_label_size;
 
         let mut label = Text::new(key_label)
-            .set("x", x + key_stroke * 1.5 + label_shift_x)
-            .set("y", y + key_stroke + key_label_size * 2.0);
+            .set("x", x + label_shift_x)
+            .set("y", y + key_label_size * 2.0);
 
         if let Some(angle) = key_slot.angle {
             let centre_x = x + w / 2.0;
