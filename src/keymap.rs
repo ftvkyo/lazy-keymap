@@ -40,7 +40,7 @@ impl Keymap {
 
         let mut texts = Group::new()
             .set("fill", "black")
-            .set("font-family", "JetBrains Mono")
+            .set("font-family", "JetBrains Mono, monospace")
             .set("font-size", key_label_size);
 
         for (id, slot) in &self.slots {
