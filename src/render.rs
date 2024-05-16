@@ -1,4 +1,5 @@
 use anyhow::Result;
+use handlebars::{no_escape, Handlebars};
 use svg::{node::element::{Group, Rectangle, Text}, Document};
 
 use crate::{keyboard::Keyboard, keymap::{Keymap, KeymapLayer}};
@@ -202,7 +203,7 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
 
     let mut layers: Vec<SvgGroup> = Vec::new();
 
-    for (i, layer) in map.layers.iter().enumerate() {
+    for (i, (_id, layer)) in map.layers.iter().enumerate() {
         let g = render_svg_layer(board, layer);
 
         let shift = match i {
@@ -259,4 +260,18 @@ pub fn render_svg(board: &Keyboard, map: &Keymap) -> Result<Document> {
         .add(name.group)
         .add(layers.group)
     )
+}
+
+
+pub fn render_config(board: &Keyboard, map: &Keymap) -> Result<String> {
+    let mut handlebars = Handlebars::new();
+    handlebars.set_strict_mode(true);
+    handlebars.register_escape_fn(no_escape);
+
+    handlebars.register_template_string("config", &board.templates.config)?;
+    handlebars.register_template_string("bindings", &board.templates.bindings)?;
+
+    let config = handlebars.render("config", map)?;
+
+    Ok(config)
 }

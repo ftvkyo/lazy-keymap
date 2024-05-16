@@ -14,11 +14,14 @@ use keyboard::Keyboard;
 use keymap::Keymap;
 use render::render_svg;
 
+use crate::render::render_config;
+
 
 const DIR_KEYBOARD: &'static str = "DIR_KEYBOARD";
 const DIR_KEYMAP: &'static str = "DIR_KEYMAP";
 const KEYMAP: &'static str = "KEYMAP";
 const OUT_SVG: &'static str = "OUT_SVG";
+const OUT_CONFIG: &'static str = "OUT_CONFIG";
 
 
 fn try_main(args: Args) -> Result<()> {
@@ -29,7 +32,10 @@ fn try_main(args: Args) -> Result<()> {
         .unwrap_or_else(|_| "keymap".into())
         .into();
     let p_out_svg: PathBuf = env::var(OUT_SVG)
-        .unwrap_or_else(|_| "out.svg".into())
+        .unwrap_or_else(|_| "out/reference.svg".into())
+        .into();
+    let p_out_config: PathBuf = env::var(OUT_CONFIG)
+        .unwrap_or_else(|_| "out/config.keymap".into())
         .into();
 
     let keymap_name = match (args.keymap, env::var(KEYMAP)) {
@@ -43,15 +49,27 @@ fn try_main(args: Args) -> Result<()> {
 
     let keymap = Keymap::load(p_keymap)?;
 
-    p_keyboard.push(&keymap.keyboard);
+    p_keyboard.push(&keymap.board);
     p_keyboard.set_extension("toml");
 
     let keyboard = Keyboard::load(p_keyboard)?;
 
-    let svg = render_svg(&keyboard, &keymap);
+    let svg = render_svg(&keyboard, &keymap)?;
+    let config = render_config(&keyboard, &keymap)?;
+
+    if let Some(parent) = p_out_svg.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+
+    if let Some(parent) = p_out_config.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
 
     info!("Saving SVG to {:?}", &p_out_svg);
-    svg::save(&p_out_svg, &svg?).with_context(|| format!("Could not save SVG to {:?}", p_out_svg))?;
+    svg::save(&p_out_svg, &svg).with_context(|| format!("Could not save SVG to {:?}", p_out_svg))?;
+
+    info!("Saving config to {:?}", &p_out_config);
+    std::fs::write(&p_out_config, &config).with_context(|| format!("Could not save config to {:?}", p_out_config))?;
 
     Ok(())
 }
@@ -64,6 +82,6 @@ fn main() {
 
     match try_main(args) {
         Ok(_) => info!("Done!"),
-        Err(e) => error!("Error: {}", e),
+        Err(e) => error!("\n{:#}", e),
     }
 }

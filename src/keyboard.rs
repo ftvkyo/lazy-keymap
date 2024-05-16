@@ -23,8 +23,8 @@ pub type KeyboardLayerTemplate = String;
 
 #[derive(Debug, Deserialize)]
 pub struct KeymapTemplates {
-    pub file: KeyboardFileTemplate,
-    pub layer: KeyboardLayerTemplate,
+    pub config: KeyboardFileTemplate,
+    pub bindings: KeyboardLayerTemplate,
 }
 
 #[derive(Debug, Deserialize)]

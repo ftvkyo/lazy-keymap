@@ -1,10 +1,15 @@
 for = "hovert60"
 name = "ftvkyo"
+includes = [
+    "dt-bindings/zmk/bt.h",
+]
 
-[[layers]]
+
+[layers.default_layer]
+
 name = "Default"
 
-[layers.keys]
+[layers.default_layer.keys]
 
 l_0x0 = "`"
 l_0x1 = "1"
@@ -34,12 +39,12 @@ l_3x3 = "C"
 l_3x4 = "V"
 l_3x5 = "B"
 
-l_4x0 = ""
-l_4x1 = ""
+l_4x0 = "&none"
+l_4x1 = "&none"
 l_4x2 = "⌥"
 l_4x3 = "⌘"
 l_4x4 = "␣"
-l_4x5 = ""
+l_4x5 = "&none"
 
 r_0x0 = "6"
 r_0x1 = "7"
@@ -69,17 +74,86 @@ r_3x3 = "."
 r_3x4 = "/"
 r_3x5 = "⇧"
 
-r_4x0 = ""
+r_4x0 = "&none"
 r_4x1 = "␣"
 r_4x2 = "⌅"
 r_4x3 = "⎇"
-r_4x4 = ""
-r_4x5 = ""
+r_4x4 = "&none"
+r_4x5 = "&none"
 
 
-[[layers]]
+[layers.lower_layer]
+
 name = "Extras"
 
-[layers.keys]
+[layers.lower_layer.keys]
 
-l_0x0 = " "
+l_0x0 = "ポ"
+l_0x1 = "テ"
+l_0x2 = "ト"
+l_0x3 = "ポ"
+l_0x4 = "テ"
+l_0x5 = "ト"
+
+l_1x0 = "ポ"
+l_1x1 = "テ"
+l_1x2 = "ト"
+l_1x3 = "ポ"
+l_1x4 = "テ"
+l_1x5 = "ト"
+
+l_2x0 = "ポ"
+l_2x1 = "テ"
+l_2x2 = "ト"
+l_2x3 = "ポ"
+l_2x4 = "テ"
+l_2x5 = "ト"
+
+l_3x0 = "ポ"
+l_3x1 = "テ"
+l_3x2 = "ト"
+l_3x3 = "ポ"
+l_3x4 = "テ"
+l_3x5 = "ト"
+
+l_4x0 = "ポ"
+l_4x1 = "テ"
+l_4x2 = "ト"
+l_4x3 = "ポ"
+l_4x4 = "テ"
+l_4x5 = "ト"
+
+r_0x0 = "ポ"
+r_0x1 = "テ"
+r_0x2 = "ト"
+r_0x3 = "ポ"
+r_0x4 = "テ"
+r_0x5 = "ト"
+
+r_1x0 = "ポ"
+r_1x1 = "テ"
+r_1x2 = "ト"
+r_1x3 = "ポ"
+r_1x4 = "テ"
+r_1x5 = "ト"
+
+r_2x0 = "ポ"
+r_2x1 = "テ"
+r_2x2 = "ト"
+r_2x3 = "ポ"
+r_2x4 = "テ"
+r_2x5 = "ト"
+
+r_3x0 = "ポ"
+r_3x1 = "テ"
+r_3x2 = "ト"
+r_3x3 = "ポ"
+r_3x4 = "テ"
+r_3x5 = "ト"
+
+r_4x0 = "ポ"
+r_4x1 = "テ"
+r_4x2 = "ト"
+r_4x3 = "ポ"
+r_4x4 = "テ"
+r_4x5 = "ト"

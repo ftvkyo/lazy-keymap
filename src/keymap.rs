@@ -2,24 +2,32 @@ use std::{collections::HashMap, path::Path};
 
 use anyhow::{Context, Result};
 use log::info;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::keyboard::KeySlotId;
 
 
-#[derive(Debug, Deserialize)]
+pub type KeymapLayerId = String;
+pub type KeyConfig = String;
+
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct KeymapLayer {
+    /// Pretty name to be used in the reference sheet
     pub name: String,
-    pub keys: HashMap<KeySlotId, String>,
+    pub keys: HashMap<KeySlotId, KeyConfig>,
 }
 
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Keymap {
     pub name: Option<String>,
     #[serde(rename = "for")]
-    pub keyboard: String,
-    pub layers: Vec<KeymapLayer>,
+    pub board: String,
+    /// Additional includes for the config
+    pub includes: Vec<String>,
+    #[serde(with = "tuple_vec_map")]
+    pub layers: Vec<(KeymapLayerId, KeymapLayer)>,
 }
 
 impl Keymap {

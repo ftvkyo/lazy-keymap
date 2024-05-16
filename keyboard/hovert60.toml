@@ -2,13 +2,6 @@ name = "hovert60"
 layer_name_pos = [0.2, 0.4]
 
 
-[templates]
-
-    file = ""
-
-    layer = ""
-
-
 [slots]
 
 # Left hand keys
@@ -84,3 +77,41 @@ r_4x2 = { pos = [9.95, 4.65], angle = -15 }
 r_4x3 = { pos = [11,    4.25] }
 r_4x4 = { pos = [12,    4   ] }
 r_4x5 = { pos = [13,    4.25] }
+
+
+[templates]
+
+config = """\
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+{{ #each includes }}
+#include <{{ this }}>
+{{ /each }}
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+{{ #each layers }}
+        {{ @key }} {
+            bindings = <
+{{> bindings this.keys }}
+            >;
+        };
+
+{{ /each }}
+    };
+};
+"""
+
+# Note: it's easier to set this up after the slots are rendered into the SVG,
+# as the slots show their ids :)
+
+bindings = """\
+{{ l_0x0 }} {{ l_0x1 }} {{ l_0x2 }} {{ l_0x3 }} {{ l_0x4 }} {{ l_0x5 }}                                     {{ r_0x0 }} {{ r_0x1 }} {{ r_0x2 }} {{ r_0x3 }} {{ r_0x4 }} {{ r_0x5 }}
+{{ l_1x0 }} {{ l_1x1 }} {{ l_1x2 }} {{ l_1x3 }} {{ l_1x4 }} {{ l_1x5 }}                                     {{ r_1x0 }} {{ r_1x1 }} {{ r_1x2 }} {{ r_1x3 }} {{ r_1x4 }} {{ r_1x5 }}
+{{ l_2x0 }} {{ l_2x1 }} {{ l_2x2 }} {{ l_2x3 }} {{ l_2x4 }} {{ l_2x5 }}                                     {{ r_2x0 }} {{ r_2x1 }} {{ r_2x2 }} {{ r_2x3 }} {{ r_2x4 }} {{ r_2x5 }}
+{{ l_3x0 }} {{ l_3x1 }} {{ l_3x2 }} {{ l_3x3 }} {{ l_3x4 }} {{ l_3x5 }} {{ l_4x5 }}             {{ r_4x0 }} {{ r_3x0 }} {{ r_3x1 }} {{ r_3x2 }} {{ r_3x3 }} {{ r_3x4 }} {{ r_3x5 }}
+                        {{ l_4x0 }} {{ l_4x1 }} {{ l_4x2 }} {{ l_4x3 }} {{ l_4x4 }}             {{ r_4x1 }} {{ r_4x2 }} {{ r_4x3 }} {{ r_4x4 }} {{ r_4x5 }}
+"""
