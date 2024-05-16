@@ -1,2 +1,37 @@
 for = "hovert60"
 name = "ftvkyo"
+
+[[layers]]
+
+name = "Default"
+
+[layers.keys]
+
+l_0x0 = "`"
+
+
+[[layers]]
+
+name = "Lower"
+
+[layers.keys]
+
+l_0x0 = "low"
+
+
+[[layers]]
+
+name = "Raise"
+
+[layers.keys]
+
+l_0x0 = "high"
+
+
+[[layers]]
+
+name = "Adjust"
+
+[layers.keys]
+
+l_0x0 = "whatever"

@@ -1,6 +1,7 @@
+use anyhow::Result;
 use svg::{node::element::{Group, Rectangle, Text}, Document};
 
-use crate::{keyboard::Keyboard, keymap::Keymap};
+use crate::{keyboard::Keyboard, keymap::{Keymap, KeymapLayer}};
 
 
 /// Wrapper over SVG [`Group`] that knows its size,
@@ -15,32 +16,16 @@ struct SvgGroup {
 }
 
 impl SvgGroup {
-    pub fn shift(mut self, x: f32, y: f32) -> Self {
-        self.min_x += x;
-        self.min_y += y;
-        self.max_x += x;
-        self.max_y += y;
+    pub fn shift(mut self, s: (f32, f32)) -> Self {
+        self.min_x += s.0;
+        self.min_y += s.1;
+        self.max_x += s.0;
+        self.max_y += s.1;
 
         self.group = self.group
-            .set("transform", format!("translate({} {})", x, y));
+            .set("transform", format!("translate({} {})", s.0, s.1));
 
         self
-    }
-
-    pub fn x(&self) -> f32 {
-        self.min_x
-    }
-
-    pub fn y(&self) -> f32 {
-        self.min_y
-    }
-
-    pub fn w(&self) -> f32 {
-        self.max_x - self.min_x
-    }
-
-    pub fn h(&self) -> f32 {
-        self.max_y - self.min_y
     }
 }
 
@@ -48,11 +33,10 @@ impl SvgGroup {
 const FONT: &'static str = "JetBrains Mono, monospace";
 
 
-fn render_svg_layer(board: &Keyboard) -> SvgGroup {
-    let group_pad = 0.1;
-    let group_margin = 0.2;
-    let group_stroke = 0.025;
-    let group_r = 0.1;
+fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
+    let layer_pad = 0.2;
+    let layer_stroke = 0.025;
+    let layer_r = 0.1;
 
     let key_pad = 0.05;
     let key_stroke = 0.05;
@@ -115,21 +99,21 @@ fn render_svg_layer(board: &Keyboard) -> SvgGroup {
         max_y = max_y.max(pos.1 + size.1);
     }
 
+    min_x -= layer_pad;
+    min_y -= layer_pad;
+    max_x += layer_pad;
+    max_y += layer_pad;
+
     let outline = Rectangle::new()
-        .set("width", max_x - min_x + group_pad * 2.0 - group_stroke)
-        .set("height", max_y - min_y + group_pad * 2.0 - group_stroke)
-        .set("x", min_x - group_pad + group_stroke / 2.0)
-        .set("y", min_y - group_pad + group_stroke / 2.0)
-        .set("rx", group_r)
-        .set("ry", group_r)
+        .set("x", min_x + layer_stroke / 2.0)
+        .set("y", min_y + layer_stroke / 2.0)
+        .set("width", max_x - min_x - layer_stroke)
+        .set("height", max_y - min_y - layer_stroke)
+        .set("rx", layer_r)
+        .set("ry", layer_r)
         .set("fill", "none")
         .set("stroke", "grey")
-        .set("stroke-width", group_stroke);
-
-    min_x -= group_margin;
-    min_y -= group_margin;
-    max_x += group_margin;
-    max_y += group_margin;
+        .set("stroke-width", layer_stroke);
 
     let group = Group::new()
         .add(slots)
@@ -146,30 +130,99 @@ fn render_svg_layer(board: &Keyboard) -> SvgGroup {
 }
 
 
-pub fn render_svg(board: &Keyboard, map: &Keymap) -> Document {
-    let doc_pad = 0.1;
-    let doc_name_size = 0.3;
-
+fn render_svg_name(board: &Keyboard, map: &Keymap, size: f32) -> SvgGroup {
     let name = if let Some(map_name) = &map.name {
         format!("{}: {}", board.name, map_name)
     } else {
         format!("{}", board.name)
     };
 
-    let name = Text::new(name)
-        .set("x", doc_pad)
-        .set("y", doc_pad)
+    let text = Text::new(&name)
+        .set("x", 0.0)
+        .set("y", 0.0)
         .set("fill", "black")
         .set("font-family", FONT)
-        .set("font-size", doc_name_size);
+        .set("font-size", size);
 
-    let g = render_svg_layer(board);
-    let g = g.shift(0.0, doc_pad + doc_name_size + doc_pad);
+    let group = Group::new()
+        .add(text);
 
-    let vb = (g.x() - doc_pad, g.y() - doc_pad, g.w() + doc_pad * 2.0, g.h() + doc_pad * 2.0);
+    SvgGroup {
+        group,
+        min_x: 0.0,
+        min_y: 0.0,
+        // Note: length here is in bytes, but there can actually be many bytes per character
+        max_x: name.len() as f32 * size,
+        max_y: size,
+    }
+}
 
-    Document::new()
+
+fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
+    let layer_margin = 0.5;
+
+    let mut min_x = f32::INFINITY;
+    let mut min_y = f32::INFINITY;
+    let mut max_x = f32::NEG_INFINITY;
+    let mut max_y = f32::NEG_INFINITY;
+
+    let mut layers: Vec<SvgGroup> = Vec::new();
+
+    for (i, layer) in map.layers.iter().enumerate() {
+        let g = render_svg_layer(board, layer);
+
+        let shift = match i {
+            0 => (0.0, 0.0),
+            1 => (layers[0].max_x + layer_margin, 0.0),
+            2 => (0.0, layers[0].max_y + layer_margin),
+            3 => (layers[0].max_x + layer_margin, layers[0].max_y + layer_margin),
+            _ => return Err(anyhow::Error::msg("Can't render more than 4 layers now")),
+        };
+
+        let g = g.shift(shift);
+
+        min_x = min_x.min(g.min_x);
+        min_y = min_y.min(g.min_y);
+        max_x = max_x.max(g.max_x);
+        max_y = max_y.max(g.max_y);
+
+        layers.push(g);
+    }
+
+    let mut group = Group::new();
+
+    for layer in layers {
+        group = group.add(layer.group);
+    }
+
+    Ok(SvgGroup {
+        group,
+        min_x,
+        min_y,
+        max_x,
+        max_y,
+    })
+}
+
+
+pub fn render_svg(board: &Keyboard, map: &Keymap) -> Result<Document> {
+    let doc_pad = 0.1;
+    let doc_name_size = 0.3;
+
+    let name = render_svg_name(board, map, doc_name_size);
+    let layers = render_svg_layers(board, map)?
+        .shift((0.0, doc_name_size + doc_pad));
+
+    let ox = name.min_x.min(layers.min_x);
+    let oy = name.min_y.min(layers.min_y);
+    let ow = layers.max_x.max(name.max_x) - ox;
+    let oh = layers.max_y.max(name.max_y) - oy;
+
+    let vb = (ox - doc_pad, oy - doc_pad, ow + doc_pad * 2.0, oh + doc_pad * 2.0);
+
+    Ok(Document::new()
         .set("viewBox", vb)
-        .add(name)
-        .add(g.group)
+        .add(name.group)
+        .add(layers.group)
+    )
 }

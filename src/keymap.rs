@@ -1,8 +1,17 @@
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use anyhow::{Context, Result};
 use log::info;
 use serde::Deserialize;
+
+use crate::keyboard::KeySlotId;
+
+
+#[derive(Debug, Deserialize)]
+pub struct KeymapLayer {
+    pub name: Option<String>,
+    pub keys: HashMap<KeySlotId, String>,
+}
 
 
 #[derive(Debug, Deserialize)]
@@ -10,6 +19,7 @@ pub struct Keymap {
     pub name: Option<String>,
     #[serde(rename = "for")]
     pub keyboard: String,
+    pub layers: Vec<KeymapLayer>,
 }
 
 impl Keymap {

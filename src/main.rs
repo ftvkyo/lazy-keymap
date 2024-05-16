@@ -51,7 +51,7 @@ fn try_main(args: Args) -> Result<()> {
     let svg = render_svg(&keyboard, &keymap);
 
     info!("Saving SVG to {:?}", &p_out_svg);
-    svg::save(&p_out_svg, &svg).with_context(|| format!("Could not save SVG to {:?}", p_out_svg))?;
+    svg::save(&p_out_svg, &svg?).with_context(|| format!("Could not save SVG to {:?}", p_out_svg))?;
 
     Ok(())
 }
