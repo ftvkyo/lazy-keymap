@@ -2,7 +2,7 @@ use anyhow::Result;
 use handlebars::{no_escape, Handlebars};
 use svg::{node::element::{Group, Rectangle, Text}, Document};
 
-use crate::{keyboard::Keyboard, keymap::{Keymap, KeymapLayer}};
+use crate::{args::Args, keyboard::Keyboard, keymap::{Keymap, KeymapLayer}};
 
 
 /// Wrapper over SVG [`Group`] that knows its size,
@@ -34,7 +34,7 @@ impl SvgGroup {
 const FONT: &'static str = "JetBrains Mono, monospace";
 
 
-fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
+fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGroup {
     let layer_pad = 0.2;
     let layer_stroke = 0.025;
     let layer_r = 0.1;
@@ -59,15 +59,15 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
         .set("stroke", "black")
         .set("stroke-width", key_stroke);
 
-    let mut ids = Group::new()
-        .set("fill", "grey")
-        .set("font-family", FONT)
-        .set("font-size", key_id_size);
-
     let mut labels = Group::new()
         .set("fill", "black")
         .set("font-family", FONT)
         .set("font-size", key_label_size);
+
+    let mut ids = Group::new()
+        .set("fill", "grey")
+        .set("font-family", FONT)
+        .set("font-size", key_id_size);
 
     for (key_id, key_slot) in &board.slots {
         let size = key_slot.size.unwrap_or((1.0, 1.0));
@@ -88,10 +88,6 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
             .set("width", w)
             .set("height", h);
 
-        let mut id = Text::new(key_id)
-            .set("x", x + key_id_size * 0.5)
-            .set("y", y + key_id_size * 1.25);
-
         let label_shift_x = match key_label.chars().count() {
             1 => 1.2,
             2 => 0.9,
@@ -103,19 +99,26 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
             .set("x", x + label_shift_x)
             .set("y", y + key_label_size * 2.0);
 
+        let mut id = Text::new(key_id)
+            .set("x", x + key_id_size * 0.5)
+            .set("y", y + key_id_size * 1.25);
+
         if let Some(angle) = key_slot.angle {
             let centre_x = x + w / 2.0;
             let centre_y = y + h / 2.0;
             let transform = format!("rotate({} {} {})", angle, centre_x, centre_y);
 
             slot = slot.set("transform", transform.clone());
-            id = id.set("transform", transform.clone());
             label = label.set("transform", transform.clone());
+            id = id.set("transform", transform.clone());
         }
 
         slots = slots.add(slot);
-        ids = ids.add(id);
         labels = labels.add(label);
+
+        if args.ids {
+            ids = ids.add(id);
+        }
 
         // Naively update mins and maxs.
         // Does not account for rotation now.
@@ -193,7 +196,7 @@ fn render_svg_name(board: &Keyboard, map: &Keymap, size: f32) -> SvgGroup {
 }
 
 
-fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
+fn render_svg_layers(board: &Keyboard, map: &Keymap, args: &Args) -> Result<SvgGroup> {
     let layer_margin = 0.5;
 
     let mut min_x = f32::INFINITY;
@@ -204,7 +207,7 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
     let mut layers: Vec<SvgGroup> = Vec::new();
 
     for (i, (_id, layer)) in map.layers.iter().enumerate() {
-        let g = render_svg_layer(board, layer);
+        let g = render_svg_layer(board, layer, args);
 
         let shift = match i {
             0 => (0.0, 0.0),
@@ -240,12 +243,12 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
 }
 
 
-pub fn render_svg(board: &Keyboard, map: &Keymap) -> Result<Document> {
+pub fn render_svg(board: &Keyboard, map: &Keymap, args: &Args) -> Result<Document> {
     let doc_pad = 0.1;
     let doc_name_size = 0.3;
 
     let name = render_svg_name(board, map, doc_name_size);
-    let layers = render_svg_layers(board, map)?
+    let layers = render_svg_layers(board, map, args)?
         .shift((0.0, doc_name_size + doc_pad));
 
     let ox = name.min_x.min(layers.min_x);

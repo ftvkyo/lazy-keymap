@@ -19,9 +19,11 @@ use crate::render::render_config;
 
 const DIR_KEYBOARD: &'static str = "DIR_KEYBOARD";
 const DIR_KEYMAP: &'static str = "DIR_KEYMAP";
-const KEYMAP: &'static str = "KEYMAP";
+
 const OUT_SVG: &'static str = "OUT_SVG";
 const OUT_CONFIG: &'static str = "OUT_CONFIG";
+
+const KEYMAP: &'static str = "KEYMAP";
 
 
 fn try_main(args: Args) -> Result<()> {
@@ -38,7 +40,9 @@ fn try_main(args: Args) -> Result<()> {
         .unwrap_or_else(|_| "out/config.keymap".into())
         .into();
 
-    let keymap_name = match (args.keymap, env::var(KEYMAP)) {
+    let env_keymap = env::var(KEYMAP);
+
+    let keymap_name = match (&args.keymap, &env_keymap) {
         (Some(keymap), _) => keymap,
         (None, Ok(keymap)) => keymap,
         _ => return Err(anyhow::Error::msg(format!("Neither {} env var, nor {} arg are set", KEYMAP, stringify!(args.keymap)))),
@@ -54,7 +58,7 @@ fn try_main(args: Args) -> Result<()> {
 
     let keyboard = Keyboard::load(p_keyboard)?;
 
-    let svg = render_svg(&keyboard, &keymap)?;
+    let svg = render_svg(&keyboard, &keymap, &args)?;
     let config = render_config(&keyboard, &keymap)?;
 
     if let Some(parent) = p_out_svg.parent() {
