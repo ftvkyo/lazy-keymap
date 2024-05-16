@@ -15,6 +15,18 @@ struct SvgGroup {
 }
 
 impl SvgGroup {
+    pub fn shift(mut self, x: f32, y: f32) -> Self {
+        self.min_x += x;
+        self.min_y += y;
+        self.max_x += x;
+        self.max_y += y;
+
+        self.group = self.group
+            .set("transform", format!("translate({} {})", x, y));
+
+        self
+    }
+
     pub fn x(&self) -> f32 {
         self.min_x
     }
@@ -31,6 +43,9 @@ impl SvgGroup {
         self.max_y - self.min_y
     }
 }
+
+
+const FONT: &'static str = "JetBrains Mono, monospace";
 
 
 fn render_svg_layer(board: &Keyboard) -> SvgGroup {
@@ -57,7 +72,7 @@ fn render_svg_layer(board: &Keyboard) -> SvgGroup {
 
     let mut labels = Group::new()
         .set("fill", "black")
-        .set("font-family", "JetBrains Mono, monospace")
+        .set("font-family", FONT)
         .set("font-size", key_label_size);
 
     for (id, key_slot) in &board.slots {
@@ -131,13 +146,30 @@ fn render_svg_layer(board: &Keyboard) -> SvgGroup {
 }
 
 
-pub fn render_svg(board: &Keyboard, _map: &Keymap) -> Document {
+pub fn render_svg(board: &Keyboard, map: &Keymap) -> Document {
     let doc_pad = 0.1;
+    let doc_name_size = 0.3;
+
+    let name = if let Some(map_name) = &map.name {
+        format!("{}: {}", board.name, map_name)
+    } else {
+        format!("{}", board.name)
+    };
+
+    let name = Text::new(name)
+        .set("x", doc_pad)
+        .set("y", doc_pad)
+        .set("fill", "black")
+        .set("font-family", FONT)
+        .set("font-size", doc_name_size);
 
     let g = render_svg_layer(board);
+    let g = g.shift(0.0, doc_pad + doc_name_size + doc_pad);
+
     let vb = (g.x() - doc_pad, g.y() - doc_pad, g.w() + doc_pad * 2.0, g.h() + doc_pad * 2.0);
 
     Document::new()
         .set("viewBox", vb)
+        .add(name)
         .add(g.group)
 }

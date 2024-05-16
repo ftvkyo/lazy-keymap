@@ -7,7 +7,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Keymap {
-    name: Option<String>,
+    pub name: Option<String>,
     #[serde(rename = "for")]
     pub keyboard: String,
 }
