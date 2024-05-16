@@ -2,36 +2,100 @@ for = "hovert60"
 name = "ftvkyo"
 
 [[layers]]
-
 name = "Default"
 
 [layers.keys]
 
 l_0x0 = "`"
+l_0x1 = "1"
+l_0x2 = "2"
+l_0x3 = "3"
+l_0x4 = "4"
+l_0x5 = "5"
+
+l_1x0 = "⇥"
+l_1x1 = "Q"
+l_1x2 = "W"
+l_1x3 = "E"
+l_1x4 = "R"
+l_1x5 = "T"
+
+l_2x0 = "⌃"
+l_2x1 = "A"
+l_2x2 = "S"
+l_2x3 = "D"
+l_2x4 = "F"
+l_2x5 = "G"
+
+l_3x0 = "⇧"
+l_3x1 = "Z"
+l_3x2 = "X"
+l_3x3 = "C"
+l_3x4 = "V"
+l_3x5 = "B"
+
+l_4x0 = ""
+l_4x1 = ""
+l_4x2 = "⌥"
+l_4x3 = "⌘"
+l_4x4 = "␣"
+l_4x5 = ""
+
+r_0x0 = "6"
+r_0x1 = "7"
+r_0x2 = "8"
+r_0x3 = "9"
+r_0x4 = "0"
+r_0x5 = "⌫"
+
+r_1x0 = "Y"
+r_1x1 = "U"
+r_1x2 = "I"
+r_1x3 = "O"
+r_1x4 = "P"
+r_1x5 = "'"
+
+r_2x0 = "H"
+r_2x1 = "J"
+r_2x2 = "K"
+r_2x3 = "L"
+r_2x4 = ";"
+r_2x5 = "⌃"
+
+r_3x0 = "N"
+r_3x1 = "M"
+r_3x2 = ","
+r_3x3 = "."
+r_3x4 = "/"
+r_3x5 = "⇧"
+
+r_4x0 = ""
+r_4x1 = "␣"
+r_4x2 = "⌅"
+r_4x3 = "⎇"
+r_4x4 = ""
+r_4x5 = ""
 
 
 [[layers]]
-
 name = "Lower"
 
 [layers.keys]
 
-l_0x0 = "low"
+l_0x0 = " "
 
 
 [[layers]]
-
 name = "Raise"
 
 [layers.keys]
 
-l_0x0 = "high"
+l_0x0 = " "
 
 
 [[layers]]
-
 name = "Adjust"
 
 [layers.keys]
 
-l_0x0 = "whatever"
+l_0x0 = " "
