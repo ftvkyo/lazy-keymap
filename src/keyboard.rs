@@ -30,6 +30,7 @@ pub struct KeymapTemplates {
 #[derive(Debug, Deserialize)]
 pub struct Keyboard {
     pub name: String,
+    pub layer_name_pos: (f32, f32),
     pub slots: HashMap<KeySlotId, KeySlot>,
     pub templates: KeymapTemplates,
 }

@@ -37,6 +37,7 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
     let layer_pad = 0.2;
     let layer_stroke = 0.025;
     let layer_r = 0.1;
+    let layer_name_size = 0.3;
 
     let key_pad = 0.05;
     let key_stroke = 0.05;
@@ -140,7 +141,15 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer) -> SvgGroup {
         .set("stroke", "grey")
         .set("stroke-width", layer_stroke);
 
+    let layer_name = Text::new(&layer.name)
+        .set("x", board.layer_name_pos.0)
+        .set("y", board.layer_name_pos.1)
+        .set("fill", "black")
+        .set("font-family", FONT)
+        .set("font-size", layer_name_size);
+
     let group = Group::new()
+        .add(layer_name)
         .add(slots)
         .add(ids)
         .add(labels)
@@ -198,8 +207,8 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap) -> Result<SvgGroup> {
 
         let shift = match i {
             0 => (0.0, 0.0),
-            1 => (layers[0].max_x + layer_margin, 0.0),
-            2 => (0.0, layers[0].max_y + layer_margin),
+            1 => (0.0, layers[0].max_y + layer_margin),
+            2 => (layers[0].max_x + layer_margin, 0.0),
             3 => (layers[0].max_x + layer_margin, layers[0].max_y + layer_margin),
             _ => return Err(anyhow::Error::msg("Can't render more than 4 layers now")),
         };

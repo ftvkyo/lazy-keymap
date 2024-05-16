@@ -9,7 +9,7 @@ use crate::keyboard::KeySlotId;
 
 #[derive(Debug, Deserialize)]
 pub struct KeymapLayer {
-    pub name: Option<String>,
+    pub name: String,
     pub keys: HashMap<KeySlotId, String>,
 }
 

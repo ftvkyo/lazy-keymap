@@ -78,23 +78,7 @@ r_4x5 = ""
 
 
 [[layers]]
-name = "Lower"
-
-[layers.keys]
-
-l_0x0 = " "
-
-
-[[layers]]
-name = "Raise"
-
-[layers.keys]
-
-l_0x0 = " "
-
-
-[[layers]]
-name = "Adjust"
+name = "Extras"
 
 [layers.keys]
 
