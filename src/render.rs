@@ -185,9 +185,9 @@ fn render_svg_name(board: &Keyboard, map: &Keymap, size: f32) -> SvgGroup {
     SvgGroup {
         group,
         min_x: 0.0,
-        min_y: 0.0,
+        min_y: -size,
         max_x: name.chars().count() as f32 * size,
-        max_y: size,
+        max_y: 0.0,
     }
 }
 
