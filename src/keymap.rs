@@ -3,11 +3,30 @@ use std::{collections::HashMap, path::Path};
 use anyhow::{Context, Result};
 use log::info;
 use serde::{Deserialize, Serialize};
+use svg::node::element::Rectangle;
 
 use crate::keyboard::KeySlotId;
 
 
 pub type KeymapLayerId = String;
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum KeyStyle {
+    Mod,
+    Sys,
+    SysHeld,
+}
+
+impl KeyStyle {
+    pub fn apply(&self, rect: Rectangle) -> Rectangle {
+        match self {
+            KeyStyle::Mod => rect.set("fill", "#fcdee9"),
+            KeyStyle::Sys => rect.set("fill", "#c3e7fd"),
+            KeyStyle::SysHeld => rect.set("fill", "#beaded"),
+        }
+    }
+}
 
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -16,6 +35,8 @@ pub struct KeyConfig {
     pub display: String,
     #[serde(rename = "c")]
     pub config: String,
+    #[serde(rename = "s")]
+    pub style: Option<KeyStyle>,
 }
 
 
@@ -73,7 +94,7 @@ impl Keymap {
         // Pad config strings so it's easier to read the resulting file
         for layer in &mut keymap.layers {
             for (_, key) in &mut layer.keys {
-                key.config = format!("{: >8}", key.config);
+                key.config = format!("{: <10}", key.config);
             }
         }
 

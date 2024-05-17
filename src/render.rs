@@ -34,18 +34,15 @@ impl SvgGroup {
 const FONT: &'static str = "JetBrains Mono, monospace";
 
 
-fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGroup {
+fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> Result<SvgGroup> {
     let layer_pad = 0.2;
     let layer_stroke = 0.025;
     let layer_r = 0.1;
     let layer_name_size = 0.3;
 
     let key_pad = 0.05;
-    let key_stroke = 0.01;
     let key_id_size = 0.15;
     let key_label_size = 0.3;
-
-    let key_label_default = "".to_string();
 
     // Track boundaries around the keys
 
@@ -55,17 +52,16 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGr
     let mut max_y = f32::NEG_INFINITY;
 
     let mut slots = Group::new()
-        .set("fill", "none")
-        .set("stroke", "black")
-        .set("stroke-width", key_stroke);
+        .set("fill", "white");
 
     let mut labels = Group::new()
         .set("fill", "black")
         .set("font-family", FONT)
-        .set("font-size", key_label_size);
+        .set("font-size", key_label_size)
+        .set("font-weight", "bold");
 
     let mut ids = Group::new()
-        .set("fill", "grey")
+        .set("fill", "black")
         .set("font-family", FONT)
         .set("font-size", key_id_size);
 
@@ -73,20 +69,24 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGr
         let size = key_slot.size.unwrap_or((1.0, 1.0));
         let pos = key_slot.position;
 
-        let key_label: String = layer.keys.get(key_id)
-            .map(|l| l.display.chars().take(4).collect())
-            .unwrap_or(key_label_default.clone());
+        let key_config = layer.keys.get(key_id)
+            .ok_or_else(|| anyhow::Error::msg(format!("No config for key '{key_id}' in layer '{}'", layer.name)))?;
+        let key_label: String = key_config.display.chars().take(4).collect();
 
-        let w = size.0 - key_pad * 2.0 - key_stroke;
-        let h = size.1 - key_pad * 2.0 - key_stroke;
-        let x = pos.0 + key_pad + key_stroke / 2.0;
-        let y = pos.1 + key_pad + key_stroke / 2.0;
+        let w = size.0 - key_pad * 2.0;
+        let h = size.1 - key_pad * 2.0;
+        let x = pos.0 + key_pad;
+        let y = pos.1 + key_pad;
 
         let mut slot = Rectangle::new()
             .set("x", x)
             .set("y", y)
             .set("width", w)
             .set("height", h);
+
+        if let Some(style) = &key_config.style {
+            slot = style.apply(slot);
+        }
 
         let label_shift_x = match key_label.chars().count() {
             1 => 1.2,
@@ -142,13 +142,13 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGr
         .set("rx", layer_r)
         .set("ry", layer_r)
         .set("fill", "none")
-        .set("stroke", "grey")
+        .set("stroke", "#505050")
         .set("stroke-width", layer_stroke);
 
     let layer_name = Text::new(&layer.name)
         .set("x", board.layer_name_pos.0)
         .set("y", board.layer_name_pos.1)
-        .set("fill", "black")
+        .set("fill", "white")
         .set("font-family", FONT)
         .set("font-size", layer_name_size);
 
@@ -159,13 +159,13 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> SvgGr
         .add(labels)
         .add(outline);
 
-    SvgGroup {
+    Ok(SvgGroup {
         group,
         min_x,
         min_y,
         max_x,
         max_y,
-    }
+    })
 }
 
 
@@ -179,7 +179,7 @@ fn render_svg_name(board: &Keyboard, map: &Keymap, size: f32) -> SvgGroup {
     let text = Text::new(&name)
         .set("x", 0.0)
         .set("y", 0.0)
-        .set("fill", "black")
+        .set("fill", "white")
         .set("font-family", FONT)
         .set("font-size", size);
 
@@ -207,7 +207,7 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap, args: &Args) -> Result<SvgG
     let mut layers: Vec<SvgGroup> = Vec::new();
 
     for (i, layer) in map.layers.iter().enumerate() {
-        let g = render_svg_layer(board, layer, args);
+        let g = render_svg_layer(board, layer, args)?;
 
         let shift = match i {
             0 => (0.0, 0.0),
@@ -258,8 +258,16 @@ pub fn render_svg(board: &Keyboard, map: &Keymap, args: &Args) -> Result<Documen
 
     let vb = (ox - doc_pad, oy - doc_pad, ow + doc_pad * 2.0, oh + doc_pad * 2.0);
 
+    let bg = Rectangle::new()
+        .set("x", vb.0)
+        .set("y", vb.1)
+        .set("width", vb.2)
+        .set("height", vb.3)
+        .set("fill", "black");
+
     Ok(Document::new()
         .set("viewBox", vb)
+        .add(bg)
         .add(name.group)
         .add(layers.group)
     )

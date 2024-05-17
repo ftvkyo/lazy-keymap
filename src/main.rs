@@ -2,6 +2,7 @@ use std::{env, path::PathBuf};
 
 use anyhow::{Context, Result};
 use clap::Parser;
+use expanduser::expanduser;
 use log::{error, info};
 
 pub mod args;
@@ -12,9 +13,7 @@ pub mod render;
 use args::Args;
 use keyboard::Keyboard;
 use keymap::Keymap;
-use render::render_svg;
-
-use crate::render::render_config;
+use render::{render_svg, render_config};
 
 
 const DIR_KEYBOARD: &'static str = "DIR_KEYBOARD";
@@ -33,12 +32,10 @@ fn try_main(args: Args) -> Result<()> {
     let mut p_keymap: PathBuf = env::var(DIR_KEYMAP)
         .unwrap_or_else(|_| "keymap".into())
         .into();
-    let p_out_svg: PathBuf = env::var(OUT_SVG)
-        .unwrap_or_else(|_| "out/reference.svg".into())
-        .into();
-    let p_out_config: PathBuf = env::var(OUT_CONFIG)
-        .unwrap_or_else(|_| "out/config.keymap".into())
-        .into();
+    let p_out_svg: PathBuf = expanduser(env::var(OUT_SVG)
+        .unwrap_or_else(|_| "out/reference.svg".into()))?;
+    let p_out_config: PathBuf = expanduser(env::var(OUT_CONFIG)
+        .unwrap_or_else(|_| "out/config.keymap".into()))?;
 
     let env_keymap = env::var(KEYMAP);
 

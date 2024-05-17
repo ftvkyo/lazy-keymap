@@ -130,13 +130,13 @@ config = """\
 # Note: Set this grid up after rendering the slots in the SVG with the flag that renders slot ids.
 #       It makes is easier.
 
-# Note: These are aligned weirdly because each "{{ ... }}" here is padded to 8 characters.
-#       This way, the resulting config is easier to read.
+# Note: These are aligned weirdly because contents of each "{{ ... }}" are padded.
+#       This way, the resulting config is easier to check for errors.
 
 bindings = """\
-{{ l_0x0.c }} {{ l_0x1.c }} {{ l_0x2.c }} {{ l_0x3.c }} {{ l_0x4.c }} {{ l_0x5.c }}           /* SPLIT */           {{ r_0x0.c }} {{ r_0x1.c }} {{ r_0x2.c }} {{ r_0x3.c }} {{ r_0x4.c }} {{ r_0x5.c }}
-{{ l_1x0.c }} {{ l_1x1.c }} {{ l_1x2.c }} {{ l_1x3.c }} {{ l_1x4.c }} {{ l_1x5.c }}           /* SPLIT */           {{ r_1x0.c }} {{ r_1x1.c }} {{ r_1x2.c }} {{ r_1x3.c }} {{ r_1x4.c }} {{ r_1x5.c }}
-{{ l_2x0.c }} {{ l_2x1.c }} {{ l_2x2.c }} {{ l_2x3.c }} {{ l_2x4.c }} {{ l_2x5.c }}           /* SPLIT */           {{ r_2x0.c }} {{ r_2x1.c }} {{ r_2x2.c }} {{ r_2x3.c }} {{ r_2x4.c }} {{ r_2x5.c }}
-{{ l_3x0.c }} {{ l_3x1.c }} {{ l_3x2.c }} {{ l_3x3.c }} {{ l_3x4.c }} {{ l_3x5.c }} {{ l_4x5.c }}  /* SPLIT */  {{ r_4x0.c }} {{ r_3x0.c }} {{ r_3x1.c }} {{ r_3x2.c }} {{ r_3x3.c }} {{ r_3x4.c }} {{ r_3x5.c }}
-                  {{ l_4x0.c }} {{ l_4x1.c }} {{ l_4x2.c }} {{ l_4x3.c }} {{ l_4x4.c }}  /* SPLIT */  {{ r_4x1.c }} {{ r_4x2.c }} {{ r_4x3.c }} {{ r_4x4.c }} {{ r_4x5.c }}
+{{ l_0x0.c }} {{ l_0x1.c }} {{ l_0x2.c }} {{ l_0x3.c }} {{ l_0x4.c }} {{ l_0x5.c }}             /*   */             {{ r_0x0.c }} {{ r_0x1.c }} {{ r_0x2.c }} {{ r_0x3.c }} {{ r_0x4.c }} {{ r_0x5.c }}
+{{ l_1x0.c }} {{ l_1x1.c }} {{ l_1x2.c }} {{ l_1x3.c }} {{ l_1x4.c }} {{ l_1x5.c }}             /*   */             {{ r_1x0.c }} {{ r_1x1.c }} {{ r_1x2.c }} {{ r_1x3.c }} {{ r_1x4.c }} {{ r_1x5.c }}
+{{ l_2x0.c }} {{ l_2x1.c }} {{ l_2x2.c }} {{ l_2x3.c }} {{ l_2x4.c }} {{ l_2x5.c }}             /*   */             {{ r_2x0.c }} {{ r_2x1.c }} {{ r_2x2.c }} {{ r_2x3.c }} {{ r_2x4.c }} {{ r_2x5.c }}
+{{ l_3x0.c }} {{ l_3x1.c }} {{ l_3x2.c }} {{ l_3x3.c }} {{ l_3x4.c }} {{ l_3x5.c }} {{ l_4x5.c }}  /*   */  {{ r_4x0.c }} {{ r_3x0.c }} {{ r_3x1.c }} {{ r_3x2.c }} {{ r_3x3.c }} {{ r_3x4.c }} {{ r_3x5.c }}
+                      {{ l_4x0.c }} {{ l_4x1.c }} {{ l_4x2.c }} {{ l_4x3.c }} {{ l_4x4.c }}  /*   */  {{ r_4x1.c }} {{ r_4x2.c }} {{ r_4x3.c }} {{ r_4x4.c }} {{ r_4x5.c }}
 """
