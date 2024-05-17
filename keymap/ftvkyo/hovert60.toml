@@ -230,7 +230,7 @@ l_3x1 = { d = "", c = "&none" }
 l_3x2 = { d = "⎇ X", c = "&kp RA(X)" }
 l_3x3 = { d = "", c = "&none" }
 l_3x4 = { d = "", c = "&none" }
-l_3x5 = { d = "", c = "&none" }
+l_3x5 = { d = "⎇ B", c = "&kp RA(B)" }
 
 l_4x0 = { d = "", c = "&none" }
 l_4x1 = { d = "⌾", c = "&trans", s = "mod" }
