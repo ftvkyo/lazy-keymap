@@ -14,6 +14,7 @@ pub type KeymapLayerId = String;
 #[serde(rename_all = "snake_case")]
 pub enum KeyStyle {
     Mod,
+    Ctl,
     Sys,
     SysHeld,
 }
@@ -22,6 +23,7 @@ impl KeyStyle {
     pub fn apply(&self, rect: Rectangle) -> Rectangle {
         match self {
             KeyStyle::Mod => rect.set("fill", "#fcdee9"),
+            KeyStyle::Ctl => rect.set("fill", "#aefac6"),
             KeyStyle::Sys => rect.set("fill", "#c3e7fd"),
             KeyStyle::SysHeld => rect.set("fill", "#beaded"),
         }

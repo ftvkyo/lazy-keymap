@@ -84,6 +84,10 @@ fn render_svg_layer(board: &Keyboard, layer: &KeymapLayer, args: &Args) -> Resul
             .set("width", w)
             .set("height", h);
 
+        if key_label.trim().is_empty() {
+            slot = slot.set("fill", "grey");
+        }
+
         if let Some(style) = &key_config.style {
             slot = style.apply(slot);
         }
