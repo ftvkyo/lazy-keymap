@@ -11,6 +11,9 @@ defines = [
     ["RAISE", "2"],
     ["ADJUST", "3"],
 
+    ["LT_L", "LOWER SPACE"],
+    ["LT_R", "RAISE SPACE"],
+
     ["BT0", "BT_SEL 0"],
     ["BT1", "BT_SEL 1"],
     ["BT2", "BT_SEL 2"],
@@ -64,25 +67,25 @@ l_1x3 = { d = "E", c = "&kp E" }
 l_1x4 = { d = "R", c = "&kp R" }
 l_1x5 = { d = "T", c = "&kp T" }
 
-l_2x0 = { d = "⌃", c = "&kp LCTRL", s = "mod" }
+l_2x0 = { d = "⇧", c = "&kp LSHFT", s = "mod" }
 l_2x1 = { d = "A", c = "&kp A" }
 l_2x2 = { d = "S", c = "&kp S" }
 l_2x3 = { d = "D", c = "&kp D" }
 l_2x4 = { d = "F", c = "&kp F" }
 l_2x5 = { d = "G", c = "&kp G" }
 
-l_3x0 = { d = "⇧", c = "&kp LSHFT", s = "mod" }
+l_3x0 = { d = "⎋", c = "&kp ESC"}
 l_3x1 = { d = "Z", c = "&kp Z" }
 l_3x2 = { d = "X", c = "&kp X" }
 l_3x3 = { d = "C", c = "&kp C" }
 l_3x4 = { d = "V", c = "&kp V" }
 l_3x5 = { d = "B", c = "&kp B" }
 
-l_4x0 = { d = "⎋", c = "&kp ESC" }
+l_4x0 = { d = " ", c = "&none" }
 l_4x1 = { d = "⌥", c = "&kp LALT", s = "mod" }
 l_4x2 = { d = "⌘", c = "&kp LMETA", s = "mod" }
-l_4x3 = { d = "↓", c = "&mo LOWER", s = "sys" }
-l_4x4 = { d = "␣", c = "&kp SPACE" }
+l_4x3 = { d = "⌃", c = "&kp LCTRL", s = "mod" }
+l_4x4 = { d = "↓ ␣", c = "&lt LT_L", s = "sys" }
 l_4x5 = { d = "[", c = "&kp LBKT" }
 
 r_0x0 = { d = "6", c = "&kp N6" }
@@ -104,19 +107,19 @@ r_2x1 = { d = "J", c = "&kp J" }
 r_2x2 = { d = "K", c = "&kp K" }
 r_2x3 = { d = "L", c = "&kp L" }
 r_2x4 = { d = ";", c = "&kp SEMI" }
-r_2x5 = { d = "⌃", c = "&kp RCTRL", s = "mod" }
+r_2x5 = { d = "⇧", c = "&kp RSHFT", s = "mod" }
 
 r_3x0 = { d = "N", c = "&kp N" }
 r_3x1 = { d = "M", c = "&kp M" }
 r_3x2 = { d = ",", c = "&kp COMMA" }
 r_3x3 = { d = ".", c = "&kp DOT" }
 r_3x4 = { d = "/", c = "&kp SLASH" }
-r_3x5 = { d = "⇧", c = "&kp RSHFT", s = "mod" }
+r_3x5 = { d = "↵", c = "&kp RET" }
 
 r_4x0 = { d = "]", c = "&kp RBKT" }
-r_4x1 = { d = "␣", c = "&kp SPACE" }
-r_4x2 = { d = "↑", c = "&mo RAISE", s = "sys" }
-r_4x3 = { d = "↵", c = "&kp RET" }
+r_4x1 = { d = "␣ ↑", c = "&lt LT_R", s = "sys" }
+r_4x2 = { d = "⌃", c = "&kp RCTRL", s = "mod" }
+r_4x3 = { d = "⌘", c = "&kp LMETA", s = "mod" }
 r_4x4 = { d = " ", c = "&none" }
 r_4x5 = { d = " ", c = "&none" }
 
@@ -148,18 +151,18 @@ l_2x3 = { d = "PgUp", c = "&kp PG_UP" }
 l_2x4 = { d = "End", c = "&kp END" }
 l_2x5 = { d = "", c = "&none" }
 
-l_3x0 = { d = "⌾", c = "&trans", s = "mod" }
+l_3x0 = { d = "⇪", c = "&kp CAPS" }
 l_3x1 = { d = "", c = "&none" }
 l_3x2 = { d = "", c = "&none" }
 l_3x3 = { d = "", c = "&none" }
 l_3x4 = { d = "", c = "&none" }
 l_3x5 = { d = "", c = "&none" }
 
-l_4x0 = { d = "⇪", c = "&kp CAPS" }
+l_4x0 = { d = "", c = "&none" }
 l_4x1 = { d = "⌾", c = "&trans", s = "mod" }
 l_4x2 = { d = "⌾", c = "&trans", s = "mod" }
-l_4x3 = { d = "↓", c = "&trans", s = "sys_held" }
-l_4x4 = { d = "", c = "&none" }
+l_4x3 = { d = "⌾", c = "&trans", s = "mod" }
+l_4x4 = { d = "↓", c = "&trans", s = "sys_held" }
 l_4x5 = { d = "", c = "&none" }
 
 r_0x0 = { d = "F6", c = "&kp F6" }
@@ -188,12 +191,12 @@ r_3x1 = { d = "", c = "&none" }
 r_3x2 = { d = "", c = "&none" }
 r_3x3 = { d = "", c = "&none" }
 r_3x4 = { d = "", c = "&none" }
-r_3x5 = { d = "⌾", c = "&trans", s = "mod" }
+r_3x5 = { d = "", c = "&none" }
 
 r_4x0 = { d = "", c = "&none" }
-r_4x1 = { d = "", c = "&none" }
-r_4x2 = { d = "↑", c = "&trans", s = "sys" }
-r_4x3 = { d = "", c = "&none" }
+r_4x1 = { d = "↑", c = "&trans", s = "sys" }
+r_4x2 = { d = "⌾", c = "&trans", s = "mod" }
+r_4x3 = { d = "⌾", c = "&trans", s = "mod" }
 r_4x4 = { d = "", c = "&none" }
 r_4x5 = { d = "", c = "&none" }
 
@@ -225,7 +228,7 @@ l_2x3 = { d = "", c = "&none" }
 l_2x4 = { d = "\\", c = "&kp BSLH" }
 l_2x5 = { d = "-", c = "&kp MINUS" }
 
-l_3x0 = { d = "⌾", c = "&trans", s = "mod" }
+l_3x0 = { d = "", c = "&none" }
 l_3x1 = { d = "", c = "&none" }
 l_3x2 = { d = "⎇ X", c = "&kp RA(X)" }
 l_3x3 = { d = "", c = "&none" }
@@ -235,8 +238,8 @@ l_3x5 = { d = "⎇ B", c = "&kp RA(B)" }
 l_4x0 = { d = "", c = "&none" }
 l_4x1 = { d = "⌾", c = "&trans", s = "mod" }
 l_4x2 = { d = "⌾", c = "&trans", s = "mod" }
-l_4x3 = { d = "↓", c = "&trans", s = "sys" }
-l_4x4 = { d = "", c = "&none" }
+l_4x3 = { d = "⌾", c = "&trans", s = "mod" }
+l_4x4 = { d = "↓", c = "&trans", s = "sys" }
 l_4x5 = { d = "", c = "&none" }
 
 r_0x0 = { d = "", c = "&none" }
@@ -265,12 +268,12 @@ r_3x1 = { d = "⎇ M", c = "&kp RA(M)" }
 r_3x2 = { d = "", c = "&none" }
 r_3x3 = { d = "", c = "&none" }
 r_3x4 = { d = "", c = "&none" }
-r_3x5 = { d = "⌾", c = "&trans", s = "mod" }
+r_3x5 = { d = "", c = "&none" }
 
 r_4x0 = { d = "", c = "&none" }
-r_4x1 = { d = "", c = "&none" }
-r_4x2 = { d = "↑", c = "&trans", s = "sys_held" }
-r_4x3 = { d = "", c = "&none" }
+r_4x1 = { d = "↑", c = "&trans", s = "sys_held" }
+r_4x2 = { d = "⌾", c = "&trans", s = "mod" }
+r_4x3 = { d = "⌾", c = "&trans", s = "mod" }
 r_4x4 = { d = "", c = "&none" }
 r_4x5 = { d = "", c = "&none" }
 
@@ -312,8 +315,8 @@ l_3x5 = { d = "", c = "&none" }
 l_4x0 = { d = "", c = "&none" }
 l_4x1 = { d = "", c = "&none" }
 l_4x2 = { d = "", c = "&none" }
-l_4x3 = { d = "↓", c = "&trans", s = "sys_held" }
-l_4x4 = { d = "", c = "&none" }
+l_4x3 = { d = "", c = "&none" }
+l_4x4 = { d = "↓", c = "&trans", s = "sys_held" }
 l_4x5 = { d = "", c = "&none" }
 
 r_0x0 = { d = "", c = "&none" }
@@ -345,8 +348,8 @@ r_3x4 = { d = "", c = "&none" }
 r_3x5 = { d = "", c = "&none" }
 
 r_4x0 = { d = "", c = "&none" }
-r_4x1 = { d = "", c = "&none" }
-r_4x2 = { d = "↑", c = "&trans", s = "sys_held" }
+r_4x1 = { d = "↑", c = "&trans", s = "sys_held" }
+r_4x2 = { d = "", c = "&none" }
 r_4x3 = { d = "", c = "&none" }
 r_4x4 = { d = "", c = "&none" }
 r_4x5 = { d = "", c = "&none" }
