@@ -1,8 +1,26 @@
-for = "hovert60"
 name = "ftvkyo"
+board = "hovert60"
+
 includes = [
     "dt-bindings/zmk/bt.h",
 ]
+
+defines = [
+    ["DEFAULT", "0"],
+    ["LOWER", "1"],
+    ["RAISE", "2"],
+    ["ADJUST", "3"],
+]
+
+extras = """
+conditional_layers {
+    compatible = "zmk,conditional-layers";
+    tri_layer {
+        if-layers = <LOWER RAISE>;
+        then-layer = <ADJUST>;
+    };
+};
+"""
 
 
 [layers.default_layer]
@@ -84,9 +102,163 @@ r_4x5 = { d = " ", c = "&none" }
 
 [layers.lower_layer]
 
-name = "Extras"
+name = "Lower"
 
 [layers.lower_layer.keys]
+
+l_0x0 = { d = "ポ", c = "&none" }
+l_0x1 = { d = "テ", c = "&none" }
+l_0x2 = { d = "ト", c = "&none" }
+l_0x3 = { d = "ポ", c = "&none" }
+l_0x4 = { d = "テ", c = "&none" }
+l_0x5 = { d = "ト", c = "&none" }
+
+l_1x0 = { d = "ポ", c = "&none" }
+l_1x1 = { d = "テ", c = "&none" }
+l_1x2 = { d = "ト", c = "&none" }
+l_1x3 = { d = "ポ", c = "&none" }
+l_1x4 = { d = "テ", c = "&none" }
+l_1x5 = { d = "ト", c = "&none" }
+
+l_2x0 = { d = "ポ", c = "&none" }
+l_2x1 = { d = "テ", c = "&none" }
+l_2x2 = { d = "ト", c = "&none" }
+l_2x3 = { d = "ポ", c = "&none" }
+l_2x4 = { d = "テ", c = "&none" }
+l_2x5 = { d = "ト", c = "&none" }
+
+l_3x0 = { d = "ポ", c = "&none" }
+l_3x1 = { d = "テ", c = "&none" }
+l_3x2 = { d = "ト", c = "&none" }
+l_3x3 = { d = "ポ", c = "&none" }
+l_3x4 = { d = "テ", c = "&none" }
+l_3x5 = { d = "ト", c = "&none" }
+
+l_4x0 = { d = "ポ", c = "&none" }
+l_4x1 = { d = "テ", c = "&none" }
+l_4x2 = { d = "ト", c = "&none" }
+l_4x3 = { d = "ポ", c = "&none" }
+l_4x4 = { d = "テ", c = "&none" }
+l_4x5 = { d = "ト", c = "&none" }
+
+r_0x0 = { d = "ポ", c = "&none" }
+r_0x1 = { d = "テ", c = "&none" }
+r_0x2 = { d = "ト", c = "&none" }
+r_0x3 = { d = "ポ", c = "&none" }
+r_0x4 = { d = "テ", c = "&none" }
+r_0x5 = { d = "ト", c = "&none" }
+
+r_1x0 = { d = "ポ", c = "&none" }
+r_1x1 = { d = "テ", c = "&none" }
+r_1x2 = { d = "ト", c = "&none" }
+r_1x3 = { d = "ポ", c = "&none" }
+r_1x4 = { d = "テ", c = "&none" }
+r_1x5 = { d = "ト", c = "&none" }
+
+r_2x0 = { d = "ポ", c = "&none" }
+r_2x1 = { d = "テ", c = "&none" }
+r_2x2 = { d = "ト", c = "&none" }
+r_2x3 = { d = "ポ", c = "&none" }
+r_2x4 = { d = "テ", c = "&none" }
+r_2x5 = { d = "ト", c = "&none" }
+
+r_3x0 = { d = "ポ", c = "&none" }
+r_3x1 = { d = "テ", c = "&none" }
+r_3x2 = { d = "ト", c = "&none" }
+r_3x3 = { d = "ポ", c = "&none" }
+r_3x4 = { d = "テ", c = "&none" }
+r_3x5 = { d = "ト", c = "&none" }
+
+r_4x0 = { d = "ポ", c = "&none" }
+r_4x1 = { d = "テ", c = "&none" }
+r_4x2 = { d = "ト", c = "&none" }
+r_4x3 = { d = "ポ", c = "&none" }
+r_4x4 = { d = "テ", c = "&none" }
+r_4x5 = { d = "ト", c = "&none" }
+
+
+[layers.raise_layer]
+
+name = "Raise"
+
+[layers.raise_layer.keys]
+
+l_0x0 = { d = "ポ", c = "&none" }
+l_0x1 = { d = "テ", c = "&none" }
+l_0x2 = { d = "ト", c = "&none" }
+l_0x3 = { d = "ポ", c = "&none" }
+l_0x4 = { d = "テ", c = "&none" }
+l_0x5 = { d = "ト", c = "&none" }
+
+l_1x0 = { d = "ポ", c = "&none" }
+l_1x1 = { d = "テ", c = "&none" }
+l_1x2 = { d = "ト", c = "&none" }
+l_1x3 = { d = "ポ", c = "&none" }
+l_1x4 = { d = "テ", c = "&none" }
+l_1x5 = { d = "ト", c = "&none" }
+
+l_2x0 = { d = "ポ", c = "&none" }
+l_2x1 = { d = "テ", c = "&none" }
+l_2x2 = { d = "ト", c = "&none" }
+l_2x3 = { d = "ポ", c = "&none" }
+l_2x4 = { d = "テ", c = "&none" }
+l_2x5 = { d = "ト", c = "&none" }
+
+l_3x0 = { d = "ポ", c = "&none" }
+l_3x1 = { d = "テ", c = "&none" }
+l_3x2 = { d = "ト", c = "&none" }
+l_3x3 = { d = "ポ", c = "&none" }
+l_3x4 = { d = "テ", c = "&none" }
+l_3x5 = { d = "ト", c = "&none" }
+
+l_4x0 = { d = "ポ", c = "&none" }
+l_4x1 = { d = "テ", c = "&none" }
+l_4x2 = { d = "ト", c = "&none" }
+l_4x3 = { d = "ポ", c = "&none" }
+l_4x4 = { d = "テ", c = "&none" }
+l_4x5 = { d = "ト", c = "&none" }
+
+r_0x0 = { d = "ポ", c = "&none" }
+r_0x1 = { d = "テ", c = "&none" }
+r_0x2 = { d = "ト", c = "&none" }
+r_0x3 = { d = "ポ", c = "&none" }
+r_0x4 = { d = "テ", c = "&none" }
+r_0x5 = { d = "ト", c = "&none" }
+
+r_1x0 = { d = "ポ", c = "&none" }
+r_1x1 = { d = "テ", c = "&none" }
+r_1x2 = { d = "ト", c = "&none" }
+r_1x3 = { d = "ポ", c = "&none" }
+r_1x4 = { d = "テ", c = "&none" }
+r_1x5 = { d = "ト", c = "&none" }
+
+r_2x0 = { d = "ポ", c = "&none" }
+r_2x1 = { d = "テ", c = "&none" }
+r_2x2 = { d = "ト", c = "&none" }
+r_2x3 = { d = "ポ", c = "&none" }
+r_2x4 = { d = "テ", c = "&none" }
+r_2x5 = { d = "ト", c = "&none" }
+
+r_3x0 = { d = "ポ", c = "&none" }
+r_3x1 = { d = "テ", c = "&none" }
+r_3x2 = { d = "ト", c = "&none" }
+r_3x3 = { d = "ポ", c = "&none" }
+r_3x4 = { d = "テ", c = "&none" }
+r_3x5 = { d = "ト", c = "&none" }
+
+r_4x0 = { d = "ポ", c = "&none" }
+r_4x1 = { d = "テ", c = "&none" }
+r_4x2 = { d = "ト", c = "&none" }
+r_4x3 = { d = "ポ", c = "&none" }
+r_4x4 = { d = "テ", c = "&none" }
+r_4x5 = { d = "ト", c = "&none" }
+
+
+[layers.adjust_layer]
+
+name = "Adjust"
+
+[layers.adjust_layer.keys]
 
 l_0x0 = { d = "ポ", c = "&none" }
 l_0x1 = { d = "テ", c = "&none" }
