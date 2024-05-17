@@ -206,7 +206,7 @@ fn render_svg_layers(board: &Keyboard, map: &Keymap, args: &Args) -> Result<SvgG
 
     let mut layers: Vec<SvgGroup> = Vec::new();
 
-    for (i, (_id, layer)) in map.layers.iter().enumerate() {
+    for (i, layer) in map.layers.iter().enumerate() {
         let g = render_svg_layer(board, layer, args);
 
         let shift = match i {

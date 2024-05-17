@@ -23,11 +23,11 @@ conditional_layers {
 """
 
 
-[layers.default_layer]
+[[layers]]
 
 name = "Default"
 
-[layers.default_layer.keys]
+[layers.keys]
 
 l_0x0 = { d = "`", c = "&none" }
 l_0x1 = { d = "1", c = "&none" }
@@ -100,11 +100,11 @@ r_4x4 = { d = " ", c = "&none" }
 r_4x5 = { d = " ", c = "&none" }
 
 
-[layers.lower_layer]
+[[layers]]
 
 name = "Lower"
 
-[layers.lower_layer.keys]
+[layers.keys]
 
 l_0x0 = { d = "ポ", c = "&none" }
 l_0x1 = { d = "テ", c = "&none" }
@@ -177,11 +177,11 @@ r_4x4 = { d = "テ", c = "&none" }
 r_4x5 = { d = "ト", c = "&none" }
 
 
-[layers.raise_layer]
+[[layers]]
 
 name = "Raise"
 
-[layers.raise_layer.keys]
+[layers.keys]
 
 l_0x0 = { d = "ポ", c = "&none" }
 l_0x1 = { d = "テ", c = "&none" }
@@ -254,11 +254,11 @@ r_4x4 = { d = "テ", c = "&none" }
 r_4x5 = { d = "ト", c = "&none" }
 
 
-[layers.adjust_layer]
+[[layers]]
 
 name = "Adjust"
 
-[layers.adjust_layer.keys]
+[layers.keys]
 
 l_0x0 = { d = "ポ", c = "&none" }
 l_0x1 = { d = "テ", c = "&none" }

@@ -40,8 +40,7 @@ pub struct Keymap {
     /// Additional nodes under the root node (verbatim)
     pub extras: Option<String>,
     /// Pairs of layer ids and layers
-    #[serde(with = "tuple_vec_map")]
-    pub layers: Vec<(KeymapLayerId, KeymapLayer)>,
+    pub layers: Vec<KeymapLayer>,
 }
 
 impl Keymap {
@@ -57,11 +56,11 @@ impl Keymap {
          * ========== */
 
         // There must be no empty / whitespace config strings
-        for (layer_id, layer) in &keymap.layers {
+        for (layer_i, layer) in keymap.layers.iter().enumerate() {
             for (key_id, key) in &layer.keys {
                 if key.config.trim().is_empty() {
                     return Err(anyhow::Error::msg(format!(
-                        "Layer {layer_id}, key {key_id} config is empty"
+                        "Layer #{layer_i} ({}), key {key_id}: config is empty", layer.name
                     )));
                 }
             }
@@ -72,7 +71,7 @@ impl Keymap {
          * ======== */
 
         // Pad config strings so it's easier to read the resulting file
-        for (_, layer) in &mut keymap.layers {
+        for layer in &mut keymap.layers {
             for (_, key) in &mut layer.keys {
                 key.config = format!("{: >8}", key.config);
             }

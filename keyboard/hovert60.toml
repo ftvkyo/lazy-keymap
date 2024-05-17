@@ -109,7 +109,10 @@ config = """\
         compatible = "zmk,keymap";
 
 {{ #each layers }}
-        {{ @key }} {
+        layer_{{ @index }} {
+
+            // {{ this.name }}
+
             bindings = <
 {{> bindings this.keys }}
             >;
